@@ -62,7 +62,7 @@ public:
   static void write(Writer& writer);
 
 private:
-  static void initialize(bool compute_all_transfers, int transfer_index,
+  static void initialize(bool compute_all_momentum_transfers, int transfer_index,
                          const std::vector<std::vector<double>>& cluster_elements,
                          const std::vector<std::array<int, 2>>& symmetries, bool verbose);
 
@@ -87,7 +87,7 @@ void MomentumExchangeDomain::initialize(const Parameters& parameters, bool verbo
         symmetries.push_back(std::array<int, 2>{k1, k2});
     }
 
-  initialize(parameters.compute_all_transfers(), parameters.get_four_point_momentum_transfer_index(),
+  initialize(parameters.compute_all_momentum_transfers(), parameters.get_four_point_momentum_transfer_index(),
              KDmn::get_elements(), symmetries, verbose);
 }
 

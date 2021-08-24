@@ -23,13 +23,13 @@ namespace domains {
 std::vector<int> MomentumExchangeDomain::elements_;
 bool MomentumExchangeDomain::initialized_ = false;
 
-void MomentumExchangeDomain::initialize(bool compute_all_transfers, int transfer_index,
+void MomentumExchangeDomain::initialize(bool compute_all_momentum_transfers, int transfer_index,
                                         const std::vector<std::vector<double>>& cluster_elements,
                                         const std::vector<std::array<int, 2>>& symmetries,
                                         bool verbose) {
   initialized_ = true;
 
-  if (!compute_all_transfers) {
+  if (!compute_all_momentum_transfers) {
     elements_ = std::vector<int>{transfer_index};
     return;
   }
