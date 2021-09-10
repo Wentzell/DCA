@@ -16,6 +16,7 @@
 #include <cmath>
 #include <stdexcept>
 #include <vector>
+#include <array>
 
 #include "dca/function/function.hpp"
 

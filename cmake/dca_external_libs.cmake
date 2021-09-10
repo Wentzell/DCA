@@ -9,6 +9,14 @@
 set(DCA_EXTERNAL_LIBS "" CACHE INTERNAL "")
 set(DCA_EXTERNAL_INCLUDE_DIRS "" CACHE INTERNAL "")
 
+##### Consider <PackageName>_ROOT in search paths #####
+if(POLICY CMP0074)
+  cmake_policy(SET CMP0074 NEW)
+endif()
+
+## Make sure FindXXX.cmake modules are found in current dir
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
+
 ################################################################################
 # Lapack
 if (NOT DCA_HAVE_LAPACK)
@@ -20,23 +28,13 @@ list(APPEND DCA_EXTERNAL_LIBS ${LAPACK_LIBRARIES})
 
 ################################################################################
 # HDF5
-# Find HDF5 by looking for a CMake configuration file (hdf5-1.10.x).
-find_package(HDF5 COMPONENTS C CXX NO_MODULE QUIET)
-if (NOT HDF5_FOUND)
-  # Fall back to a search for a FindHDF5.cmake file and execute it.
-  find_package(HDF5 REQUIRED COMPONENTS C CXX)
-endif()
-
-list(APPEND DCA_EXTERNAL_LIBS ${HDF5_LIBRARIES})
-list(APPEND DCA_EXTERNAL_INCLUDE_DIRS ${HDF5_INCLUDE_DIRS})
+find_package(HDF5 REQUIRED COMPONENTS C CXX)
+list(APPEND DCA_EXTERNAL_LIBS HDF5::HDF5)
 
 ################################################################################
 # FFTW
-set(FFTW_INCLUDE_DIR "" CACHE PATH "Path to fftw3.h.")
-set(FFTW_LIBRARY "" CACHE FILEPATH "The FFTW3(-compatible) library.")
-
-list(APPEND DCA_EXTERNAL_LIBS ${FFTW_LIBRARY})
-list(APPEND DCA_EXTERNAL_INCLUDE_DIRS ${FFTW_INCLUDE_DIR})
+find_package(FFTW REQUIRED)
+list(APPEND DCA_EXTERNAL_LIBS fftw)
 
 ################################################################################
 # Simplex GM Rule
