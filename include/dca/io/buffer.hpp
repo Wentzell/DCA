@@ -13,6 +13,7 @@
 #define DCA_IO_BUFFER_HPP
 
 #include <algorithm>
+#include <stdexcept>
 #include <memory>
 #include <vector>
 
